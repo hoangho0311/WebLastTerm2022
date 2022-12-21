@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/assets/images/favicon-32x32.png" type="image/png" />
   <!--plugins-->
-  <link href="/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/plugins/notifications/css/lobibox.min.css" />
   <link href="/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
   <link href="/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
   <link href="/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
@@ -19,17 +19,11 @@
   <link href="/assets/css/style.css" rel="stylesheet" />
   <link href="/assets/css/icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
   <!-- loader-->
 	<link href="/assets/css/pace.min.css" rel="stylesheet" />
 
-  <!--Theme Styles-->
-  <link href="/assets/css/dark-theme.css" rel="stylesheet" />
-  <link href="/assets/css/light-theme.css" rel="stylesheet" />
-  <link href="/assets/css/semi-dark.css" rel="stylesheet" />
-  <link href="/assets/css/header-colors.css" rel="stylesheet" />
 
   <title>Bookcar - Dashboard</title>
 </head>
@@ -48,14 +42,14 @@
                 <div class="card-body">
                   <div class="border p-3 rounded">
                   
-                  <form class="row g-3">
+                  <form class="row g-3" action="{{url('/sendEmail')}}">
                     <div class="form_dtl">
                         <h6 class="mb-0 text-uppercase">SIGN UP FOR A TEST DRIVE</h6>
                         <hr/>
                         <div class="row  g-3">
                             <div class="col-12">
                             <label class="form-label">CAR MODEL SELECTION</label>
-                            <select class="form-select" id="validationCustom04" required>
+                            <select class="form-select" id="validationCustom04" name="product" required>
                                 {{-- <option selected disabled value="">Choose...</option> --}}
                                 <option>Model X</option>
                                 <option>Model Y</option>
@@ -64,23 +58,23 @@
                             </div>
                             <div class="col-6">
                             <label class="form-label">LOCATION</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" required>
                             </div>
                             <div class="col-6">
                             <label class="form-label">SHOWROOM</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" required>
                             </div>
                             <div class="col-12">
                             <label class="form-label">ADDRESS</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" required>
                             </div>
                             <div class="col-12">
                             <label class="form-label">EMAIL</label>
-                            <input type="text" class="form-control">
+                            <input type="email" class="form-control" name="email" required>
                             </div>
                             <div class="col-12">
                             <label class="form-label">PHONE</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" required>
                             </div>
                             <div class="col-12">
                             <label class="form-label">ADDITIONAL INFORMATION</label>
@@ -90,7 +84,7 @@
                     </div>
                     <div class="col-12">
                       <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">TEST DRIVE</button>
+                        <button type="submit" class="btn btn-primary" onclick="success_noti()">TEST DRIVE</button>
                       </div>
                     </div>
                     <div class="col-12">
@@ -111,13 +105,20 @@
 
     </div>
 
-  <script src="/assets/js/bootstrap.bundle.min.js"></script>
-  <!--plugins-->
-  <script src="/assets/js/jquery.min.js"></script>
-  <script src="/assets/plugins/simplebar/js/simplebar.min.js"></script>
-  <script src="/assets/plugins/metismenu/js/metisMenu.min.js"></script>
-  <script src="/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-  <script src="/assets/js/pace.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <!--plugins-->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <!--notification js -->
+    <script src="/assets/plugins/notifications/js/lobibox.min.js"></script>
+    <script src="/assets/plugins/notifications/js/notifications.min.js"></script>
+    <script src="/assets/plugins/notifications/js/notification-custom-script.js"></script>
+    <script src="/assets/js/pace.min.js"></script>
+    <!--app-->
+    <script src="/assets/js/app.js"></script>
+
    <!-- Vector map JavaScript -->
   <script>
     new PerfectScrollbar(".review-list")

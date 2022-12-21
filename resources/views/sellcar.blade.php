@@ -9,6 +9,10 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<link href="https://fonts.gstatic.com" rel="preconnect">
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/assets/css/bootstrap-extended.css" rel="stylesheet" />
+	  <link href="/assets/css/style.css" rel="stylesheet" />
+  <link href="/assets/css/icons.css" rel="stylesheet">
  	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -19,58 +23,38 @@
 				@if($user->access == "admin")
 				<a class="add_product_btn" href="{{route('managerProduct')}}">Manger car</a>
 				@endif
-				<a class="openbtn add_product_btn left" onclick="openNav()"><i class="fa-regular fa-heart"></i></a>  			
-					<div class="section">
-						<div class="model">
-							<div class="select-menu">
-								<div class="select-btn">
-									<span class="sBtn-text">Select your option</span>
-									<i class="bx bx-chevron-down"></i>
-								</div>
-						
-								<ul class="options">
-									<li class="option">
-										<span class="option-text">Github</span>
-									</li>
-									<li class="option">
-										<span class="option-text">Instagram</span>
-									</li>
-									<li class="option">
-										<span class="option-text">Linkedin</span>
-									</li>
-									<li class="option">
-										<span class="option-text">Facebook</span>
-									</li>
-									<li class="option">
-										<span class="option-text">Twitter</span>
-									</li>
-								</ul>
+					<div class="row g-3">
+						<div class="col-lg-3 col-md-6 me-auto">
+							<div class="ms-auto position-relative">
+								<div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
+								<input class="form-control ps-5" name="search" id="search" type="text" placeholder="search produts">
 							</div>
 						</div>
-						<div class="type_car">
-							<div class="select_wrapper">
-								<div class="select-btn-option">
-								  <span>Select Country</span>
-								  <i class="uil uil-angle-down"></i>
-								</div>
-								<div class="content_select">
-								  <div class="search">
-									<i class="uil uil-search"></i>
-									<input spellcheck="false" type="text" placeholder="Search">
-								  </div>
-								  <ul class="options_select"></ul>
-								</div>
+						<div class="col-lg-2 col-6 col-md-3">
+							<div class="ms-auto position-relative">
+								<input type="range" class="form-range" step="10" id="slider" value="50000" min="0.0" max="200000" name="points">
+								<br/>
+								<span id="slider_value">$50000</span>
 							</div>
 						</div>
-					</div>
+						<div class="col-lg-2 col-6 col-md-3">
+							<select class="form-select" id="choose_type">
+								<option>All</option>
+								<option>Electric</option>
+								<option>Gasoline</option>
+							</select>
+						</div>
+						<div class="col-lg-1 col-6 col-md-3">
+							<a class="openbtn add_product_btn left" onclick="openNav()"><i class="fa-regular fa-heart"></i></a>  			
+						</div>
+                    </div>
+                  </div>
 					
 					<div class="tabs-car">						
-						<div class="col-car">
+						<div class="col-car all_data">
 							@if(count($data) > 0)
 							@foreach($data as $row)
 							<div class="row-car">
-								<form class="form" action="{{url('form_submit',$row->id)}}" method="POST">
-								@csrf
 								<div class="results_header">
 									<div class="result-basic-infor">
 										<input type="hidden" name="name_product" value="{{$row->name}}">
@@ -81,7 +65,7 @@
 									</div>
 									<div class="result-basic-infor result-pricing">
 										<input type="hidden" name="price_product" value="{{$row->price}}">
-										<h3 >{{ $row->price }}<button type="submit" class="addtocart delete_product_btn"><a href=""><i class="fa-regular fa-heart"></i></a></button></h3>
+										<h3 >{{ $row->price }}$<a href="{{url('form_submit',$row->id)}}" type="submit" class="addtocart delete_product_btn"><i class="fa-regular fa-heart"></i></a></h3>
 										<p>75D All-Wheel Drive
 										24,293 mile odometer
 										Peabody, MA</p>
@@ -110,19 +94,16 @@
 								</div>
 								<input type="hidden" name="idcar" value="{{$row->id}}">
 								<input type="hidden" name="product_image" value="{{$row->image}}">
-								</form>
 								<div class="result-mobile-cta"> 
-									<form class="form" action="{{url('cardetail',$row->id)}}" method="POST">
-									@csrf
-									<button type="submit" class="result_view_details">View Details</button>
-									</form>
+									<a href="{{url('cardetail',$row->id)}}" type="submit" class="result_view_details">View Details</a>
 								</div>
 								
 							</div>
-								{!! $data->links() !!}
 							@endforeach
 							@endif
 							
+						</div>
+						<div class="col-car search_data">
 						</div>
 					</div>
 			</div>
@@ -154,64 +135,75 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/dist/jquery.min.js"></script>
 <script>
-	const optionMenu = document.querySelector(".select-menu"),
-		selectBtn = optionMenu.querySelector(".select-btn"),
-		options = optionMenu.querySelectorAll(".option"),
-		sBtn_text = optionMenu.querySelector(".sBtn-text");
+    $(document).on('input', '#slider', function() {
+        $value = $(this).val();
+        if($value > 100){
+            $('.all_data').hide();
+            $('.search_data').show();
+          }else{
+            $('.all_data').show();
+            $('.search_data').hide();
+        }
+        $('#slider_value').html("$" + $(this).val());
+        $.ajax({
+            url:"{{ route('search_product_clent') }}",
+            method:"GET",
+            data:{'data':$value},
+            success:function(res){
+              $('.search_data').html(res);
+          }
+      });
+    });
+</script>
 
-		selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));       
+<script>
+	$('#search').on('keyup', function(){
+		  $value = $(this).val();
 
-		options.forEach(option =>{
-			option.addEventListener("click", ()=>{
-				let selectedOption = option.querySelector(".option-text").innerText;
-				sBtn_text.innerText = selectedOption;
+		  if($value){
+			$('.all_data').hide();
+			$('.search_data').show();
+		  }else{
+			$('.all_data').show();
+			$('.search_data').hide();
+		  }
 
-				optionMenu.classList.remove("active");
-			})
-		})
+		  $.ajax({
+			  url:"{{ URL::to('searchProduct') }}",
+			  method:'GET',
+			  data:{'data':$value}, 
+			  success:function(data)
+			  {
+				  $('.search_data').html(data);
+			  }
+		  })
+	  });
+</script>
 
-		const wrapper = document.querySelector(".select_wrapper"),
-		selectbtnoption = wrapper.querySelector(".select-btn-option"),
-		searchInp = wrapper.querySelector("input"),
-		optionsSelect = wrapper.querySelector(".options_select");
-
-		let countries = ["Afghanistan", "Algeria", "Argentina", "Australia", "Bangladesh", "Belgium", "Bhutan",
-						"Brazil", "Canada", "China", "Denmark", "Ethiopia", "Finland", "France", "Germany",
-						"Hungary", "Iceland", "India", "Indonesia", "Iran", "Italy", "Japan", "Malaysia",
-						"Maldives", "Mexico", "Morocco", "Nepal", "Netherlands", "Nigeria", "Norway", "Pakistan",
-						"Peru", "Russia", "Romania", "South Africa", "Spain", "Sri Lanka", "Sweden", "Switzerland",
-						"Thailand", "Turkey", "Uganda", "Ukraine", "United States", "United Kingdom", "Vietnam"];
-
-		function addCountry(selectedCountry) {
-			optionsSelect.innerHTML = "";
-			countries.forEach(country => {
-				let isSelected = country == selectedCountry ? "selected" : "";
-				let li = `<li onclick="updateName(this)" class="${isSelected}">${country}</li>`;
-				optionsSelect.insertAdjacentHTML("beforeend", li);
-			});
-		}
-		addCountry();
-
-		function updateName(selectedLi) {
-			searchInp.value = "";
-			addCountry(selectedLi.innerText);
-			wrapper.classList.remove("active");
-			selectbtnoption.firstElementChild.innerText = selectedLi.innerText;
-		}
-
-		searchInp.addEventListener("keyup", () => {
-			let arr = [];
-			let searchWord = searchInp.value.toLowerCase();
-			arr = countries.filter(data => {
-				return data.toLowerCase().startsWith(searchWord);
-			}).map(data => {
-				let isSelected = data == selectbtnoption.firstElementChild.innerText ? "selected" : "";
-				return `<li onclick="updateName(this)" class="${isSelected}">${data}</li>`;
-			}).join("");
-			optionsSelect.innerHTML = arr ? arr : `<p style="margin-top: 10px;">Oops! Country not found</p>`;
-		});
-
-		selectbtnoption.addEventListener("click", () => wrapper.classList.toggle("active"));
+<script>
+      $(document).ready(function() {
+        $("#choose_type").change(function(){
+                if($('#choose_type').val() == "Electric"){
+                  $('.all_data').hide();
+                  $('.search_data').show();
+                }else if($('#choose_type').val() == "Gasoline"){
+                  $('.all_data').hide();
+                  $('.search_data').show();
+                }else{
+                  $('.all_data').show();
+                  $('.search_data').hide();
+                }
+            $.ajax({
+                url:"{{ URL::to('choose_type_car_client') }}",
+                method:'GET',
+                data:{'data':$('#choose_type').val()}, 
+                success:function(data)
+                {
+                    $('.search_data').html(data);
+                }
+            });
+        });
+    });
 </script>
 </html>
 

@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="/css/main.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<link href="https://fonts.gstatic.com" rel="preconnect">
- 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
 <body>
   <div class="loader">
  </div>  
-  <nav>
+  <nav class="main_nav">
     <div class="logo-name">
         <div class="logo-image">
             <img src="/image/logo.png" alt="">
@@ -35,10 +35,6 @@
                 <i class="uil uil-files-landscapes"></i>
                 <span class="link-name">Car</span>
             </a></li>
-            <li><a href="{{route("analytics")}}">
-                <i class="uil uil-chart"></i>
-                <span class="link-name">Analytics</span>
-            </a></li>
             <li><a href="{{route("profile")}}">
                 <i class="fa-regular fa-user"></i>
                 <span class="link-name">Profile</span>
@@ -51,9 +47,9 @@
                 <i class="fa-solid fa-charging-station"></i>
                 <span class="link-name">Test drive</span>
             </a></li>
-            <li><a href="#">
+            <li><a href="{{route("history")}}">
                 <i class="uil uil-share"></i>
-                <span class="link-name">Share</span>
+                <span class="link-name">History</span>
             </a></li>
         </ul>
         
@@ -87,17 +83,17 @@
         </div>
         
         <div class="dropdown">
-            <button class="dropbtn" ><img src="/image/avater.jpg" alt=""></button>
+            <button class="dropbtn" ><img src="/image/user_image/avt_default.jpg" alt=""></button>
             <div class="dropdown-content" id="myDropdown">
                 <a href="#"><div class="section">
-                    <img src="/image/avater.jpg">
+                    <img src="/image/user_image/avt_default.jpg">
                     <h3>name</h3>
                 </div>
                 </a>
                 <hr class="dropdown-divider">
                 <a href="{{route("profile")}}"><i class="fa-regular fa-user"></i>
                     <span class="link-name">Profile</span></a>
-                <a href="{{route("analytics")}}"><i class="fa-solid fa-chart-line"></i>
+                <a href="{{route("dashboard")}}"><i class="fa-solid fa-chart-line"></i>
                     <span class="link-name">Dashboard</span></a>
                 <a href="#"><i class="fa-solid fa-sliders"></i>
                     <span class="link-name">Setting</span></a>

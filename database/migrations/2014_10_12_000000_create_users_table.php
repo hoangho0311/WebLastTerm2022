@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('access')->default("user");
             $table->string('password')->nullable();
             $table->string('google_id')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image')->default("avt_default.jpg");
+            $table->string('enable')->default("true");
             $table->rememberToken();
             $table->timestamps();
         });

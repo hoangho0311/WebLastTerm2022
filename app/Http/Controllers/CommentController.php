@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\comments;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Replycomments;
+use App\Models\Infors;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +20,11 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = comments::paginate(10);
+        $infor = Infors::all();
+        $user = User::all();
+        $Replycomments = Replycomments::all();
+        return view("admin/managerComment")->with('comments', $comments)->with('user', $user)->with('infor', $infor)->with('Replycomments', $Replycomments);
     }
 
     /**
@@ -46,48 +53,32 @@ class CommentController extends Controller
         return redirect()->route('commentpage', compact("comment"));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\comments  $comments
-     * @return \Illuminate\Http\Response
-     */
-    public function show(comments $comments)
-    {
-        //
+    public function updateStatus($id){
+        $comments = comments::find($id);
+        if($comments->visible == "true"){
+            $comments->visible = "false";
+            $comments->save();
+        }else{
+            $comments->visible = "true";
+            $comments->save();
+        }
+        
+        return redirect()->route('managerComment');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\comments  $comments
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(comments $comments)
-    {
-        //
+    public function update(Request $request, $id){
+        $comments = comments::find($id);
+        $input = $request->all();
+        $comments->fill($input)->save();
+ 
+        return redirect()->route('managerComment');
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\comments  $comments
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, comments $comments)
+ 
+    public function delete($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\comments  $comments
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(comments $comments)
-    {
-        //
+        $comments = comments::find($id);
+        $comments->delete();
+  
+        return redirect()->route('managerComment');
     }
 }

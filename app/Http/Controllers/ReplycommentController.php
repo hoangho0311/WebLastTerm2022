@@ -45,48 +45,17 @@ class ReplycommentController extends Controller
         return redirect()->route('commentpage');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Replycomments  $replycomments
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Replycomments $replycomments)
-    {
-        //
+    public function updateStatus($id){
+        $replycomment = Replycomments::find($id);
+        if($replycomment->visible == "true"){
+            $replycomment->visible = "false";
+            $replycomment->save();
+        }else{
+            $replycomment->visible = "true";
+            $replycomment->save();
+        }
+        
+        return redirect()->route('managerComment');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Replycomments  $replycomments
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Replycomments $replycomments)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Replycomments  $replycomments
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Replycomments $replycomments)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Replycomments  $replycomments
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Replycomments $replycomments)
-    {
-        //
-    }
 }

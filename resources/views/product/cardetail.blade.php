@@ -18,7 +18,7 @@
             <div class="gallery_asset--section">
                 <div class="slideshow-container">
                     <div class="mySlides fade">
-                        <img class="" src="/image/product/car1.jfif">
+                        <img class="" src="/image/cars/{{$product->image}}">
                     </div>
                     <div class="mySlides fade">
                         <img class="" src="/image/product/car2.jfif">
@@ -78,6 +78,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="text" name="price" value="{{(int)$product->price}}" hidden>
                     <div class="aside-section side-scroll--item">
                         <div class="vehicle-summary-container">
                             <div class="vehicleName-info-block tds-text--center bot_dow">
@@ -88,22 +89,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="aside-section side-scroll--item">
-                        <div class="vehicle-summary-container">
-                            <div class="vehicleName-info-block tds-text--center bot_dow">
-                                <h1 class="bot_dow">Delivery Location</h1>
-                                <span>Find your nearest delivery center by entering your registration zip code</span>
-                            </div>
-                            
-                            <div class="vehicleSummary-info-block bot_dow">
-                                <p>Registration Zip Code</p>
-                                <input type="text">
-                            </div>
-                            <div class="tds-btn_group">
-                                <button type="button" class="tds-btn">Submit</button>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div class="aside-section side-scroll--item">
                         <div class="vehicle-summary-container">
                             <div class="vehicleName-info-block tds-text--center bot_dow">
@@ -124,7 +110,7 @@
                         <div class="vehicle-summary-container">
                             <button type="button" class="paymentbackbtn" onclick="paymentback()"><i class="fa-solid fa-arrow-left-long"></i></button>
                             <div class="vehicleName-info-block tds-text--center bot_dow">
-                                <h1 class="bot_dow">Your Model 3</h1>
+                                <h1 class="bot_dow">{{$product->name}}</h1>
                             </div>
                             
                             <div class="cf-summary--section">
@@ -147,7 +133,7 @@
                                     <ul>
                                         <li>
                                             <span class="price_text">Purchase Price</span>
-                                            <span class="span_r">$45,400</span>
+                                            <span class="span_r">${{$product->price}}</span>
                                         </li>
                                         <li>
                                             <span >Price after Est. Savings</span>
@@ -163,13 +149,14 @@
                                     <ul>
                                         <li>
                                             <span class="price_text">Purchase Price</span>
-                                            <span class="span_r">$45,400</span>
+                                            <span class="span_r">${{$product->price}}</span>
                                         </li>
                                     </ul>
                                     </div>
                                 </div>
                             </div>
-                        <button type="submit" class="result_view_details">Order With Card</button>
+                        <button type="submit" class="result_view_details"  name="redirect">Order With Card</button>
+                
                         </div>
                     </div>
                 </div>

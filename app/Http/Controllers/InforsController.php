@@ -79,12 +79,16 @@ class InforsController extends Controller
         // $img_file = time() . '.' . request()->image->getClientOriginalExtension();
 
         // request()->image->move(public_path('image/user_image'), $img_file);
-
+        
         $user = User::where('email',$id)->first();
         $infor = Infors::where('iduser',$id)->first();
         $user->name = $request->name;
         $user->email= $request->email;
-        $user->image= $request->image;
+        if($request->image == null){
+            $user->image= $user->image;
+        }else{
+            $user->image= $request->image;
+        }
         $infor->iduser=$request->email;
         $infor->fname=$request->fname;
         $infor->lname=$request->lname;

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("iduser");
             $table->string("content");
-            $table->string("visible");
+            $table->string("visible")->default("true");
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CartController extends Controller
         
     }
 
-    public function form_submit(Request $request, $id){
+    public function form_submit($id){
         $cart = new carts();
         $cart->iduser = Auth::user()->id;
         $car = cars::find($id);

@@ -142,7 +142,7 @@ body.dark{
     --title-icon-color: #CCC;
 }
 /* === Custom Scroll Bar CSS === */
-nav{
+.main_nav{
     position: fixed;
     top: 0;
     left: 0;
@@ -153,35 +153,35 @@ nav{
     border-right: 1px solid var(--border-color);
     transition: var(--tran-05);
 }
-nav.close{
+.main_nav.close{
     width: 73px;
 }
-nav .logo-name{
+.main_nav .logo-name{
     display: flex;
     align-items: center;
 }
-nav .logo-image{
+.main_nav .logo-image{
     display: flex;
     justify-content: center;
     min-width: 45px;
 }
-nav .logo-image img{
+.main_nav .logo-image img{
     width: 40px;
     object-fit: cover;
 }
 
-nav .logo-name .logo_name{
+.main_nav .logo-name .logo_name{
     font-size: 22px;
     font-weight: 600;
     color: var(--text-color);
     margin-left: 14px;
     transition: var(--tran-05);
 }
-nav.close .logo_name{
+.main_nav.close .logo_name{
     opacity: 0;
     pointer-events: none;
 }
-nav .menu-items{
+.main_nav .menu-items{
     margin-top: 40px;
     height: calc(100% - 90px);
     display: flex;
@@ -571,4 +571,7 @@ nav.close ~ .dashboard .top{
         transform: rotate(2turn);
     }
 }
+
+/* dashboard user */
+
 

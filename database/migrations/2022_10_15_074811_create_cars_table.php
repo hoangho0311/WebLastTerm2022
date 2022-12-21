@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('fuel');
             $table->string('power');
             $table->string('price');
-            $table->string('quantity')->default(10);
+            $table->float('quantity')->default(10);
             $table->string('type');
             $table->string('color');
             $table->string('image');
+            $table->float('inOrder')->default(0);
             $table->timestamps();
         });
     }
